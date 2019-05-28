@@ -19,7 +19,7 @@ class PicturesController < ApplicationController
     render("pic_templates/details.html.erb")
   end
   
-  def bye_photo
+  def bye
     #Rails assigns:
     #params = {"id_to_delete" => "628"}
     

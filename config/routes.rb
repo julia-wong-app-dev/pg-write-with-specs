@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   match("/users/:id/discover", { :controller => "users", :action => "discover", :via => "get" })
 
-  match("/delete_photo/:id_to_delete", { :controller => "pictures", :action => "bye_photo", :via => "get" })
+  match("/delete_photo/:id_to_delete", { :controller => "pictures", :action => "bye", :via => "get" })
 
   match("existing_photo_form/:id_to_update", { :controller => "pictures", :action => "existing_form", :via => "get"})
 

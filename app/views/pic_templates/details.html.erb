@@ -25,7 +25,47 @@
   <dd>
     <%= @pic.fans.pluck(:username).to_sentence %>
   </dd>
+  <dt>Add a fan</dt>
+    <dd>
+      <form action="/update_fan_record">
+        <input
+          id="pic_id"
+          name="picture_id"
+          type="hidden" 
+          value = <%=@pic.id%>
+        >
+        
+        <label for ="liker">
+          Person
+        </label>
+        
+        <select id = "liker" name="liker_id">
+          <% User.all.order({ :username => :asc}).each do |a_user|%>
+            <option value= "<%= a_user.id %>">
+            <%= a_user.username %>
+            (<%= a_user.own_photos.count  %>)
+            </option>
+          <% end %>
+        </select>
+        <button type=submit>Add fan</button>
+      </form>
+    </dd>
+
+  <dt>Danger Zone</dt>
+  <dd>
+    <a href="/existing_photo_form/<%=@pic.id%>">
+      Edit this photo
+    </a>
+  </dd>
+  <dd>
+    <a href="/delete_photo/<%=@pic.id%>">
+      Delete this photo
+    </a>
+  </dd>
+    
 </dl>
+
+<h2>Commenter</h2>
 
 <table>
   <tr>
@@ -50,3 +90,42 @@
   </tr>
   <% end %>
 </table>
+
+<h3>Add a new comment</h3>
+
+<form action = "/add_new_comment">
+  <input
+   id="pic_id"
+   name="picture_id"
+   type="hidden"
+   value=<%=@pic.id%>
+  >
+  
+  <label for = "commentor_name">
+    Commenter
+  </label>
+  
+  <select 
+    id = "commentor_name" 
+    name="poster_id">
+    <% User.all.order({ :username => :asc}).each do |a_user|%>
+      <option value= "<%= a_user.id %>">
+      <%= a_user.username %>
+      (<%= a_user.own_photos.count  %>)
+      </option>
+    <% end %>
+  </select>
+  
+  <label for ="comment_text">
+    Comment
+  </label>
+  
+  <textarea 
+    id = "comment_text"
+    name = "pic_comment"
+    placeholder = "Enter a comment..."
+  ></textarea>
+
+  <button type=submit>Add comment</button>
+  
+</form>
